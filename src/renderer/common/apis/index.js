@@ -3,7 +3,7 @@ let apis = require.context('./', true, /\.js$/)
 apis = apis.keys().reduce((total, apiPath) => {
   const apiName = apiPath.match(/.*\/(.*)\.js$/)[1]
   if (apiName !== 'index') {
-    return { ...total, ...apis(apiPath).default(request) }
+    return { ...total, ...apis(apiPath) }
   }
   return total
 }, {})

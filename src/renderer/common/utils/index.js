@@ -6,6 +6,7 @@ utils = utils.keys().reduce((total, utilPath) => {
   }
   return total
 }, {})
+export * from './http'
 export default {
   install(app) {
     app.config.globalProperties.$utils = utils
