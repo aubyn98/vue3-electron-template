@@ -1,7 +1,7 @@
-const axios = require('axios')
-const qs = require('qs')
-const { ElMessage } = require('element-plus')
-const { Dev, Pro } = require('../config')
+import axios from 'axios'
+import qs from 'qs'
+import { ElMessage } from 'element-plus'
+import { Dev, Pro } from '../config'
 
 // 判断开发环境
 const development = process.env.NODE_ENV === 'development'
