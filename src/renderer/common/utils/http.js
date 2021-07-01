@@ -40,6 +40,7 @@ http.interceptors.response.use(
   }
 )
 
+const methods = ['get', 'post', 'head', 'put', 'options', 'delete']
 export function request(
   url,
   method,
@@ -47,11 +48,22 @@ export function request(
   config = {},
   options = { isQS: true }
 ) {
+  if (!url) throw new Error('argument[0] missing')
+  if (typeof url !== 'string')
+    throw new TypeError('argument[0] must be a string')
+  if (!method) throw new Error('argument[1] missing')
+  if (typeof method !== 'string')
+    throw new TypeError('argument[1] must be a string')
+  if (methods.indexOf(method) === -1)
+    throw new TypeError('argument[1], method must be ' + methods.join(' | '))
   // 判断是否为post请求
   const isPost = method.toLocaleLowerCase() === 'post'
 
   // 判断提交数据对应的key
   const paramsKey = isPost ? 'data' : 'params'
+
+  // 如果没有请求头,则初始化请求头
+  config.headers ||= {}
 
   // 是否序列化post请求的数据
   if (options.isQS && isPost) {
@@ -66,9 +78,7 @@ export function request(
     })
     params = form
     const ContentType = { 'Content-Type': 'multipart/form-data' } // 设置请求头
-    config.headers
-      ? Object.assign(config.headers, ContentType)
-      : (config.headers = ContentType)
+    Object.assign(config.headers, ContentType)
   }
 
   // 返回请求结果
