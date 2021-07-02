@@ -40,13 +40,16 @@ http.interceptors.response.use(
   }
 )
 
+function notBoolean(val) {
+  return typeof val !== 'boolean'
+}
 const methods = ['get', 'post', 'head', 'put', 'options', 'delete']
 export function request(
   url,
   method,
   params = {},
   config = {},
-  options = { isQS: true }
+  options = { isQS: true, form: false }
 ) {
   if (!url) throw new Error('argument[0] missing')
   if (typeof url !== 'string')
@@ -67,11 +70,16 @@ export function request(
 
   // 是否序列化post请求的数据
   options.isQS ??= true
+  if (notBoolean(options.isQS))
+    throw new TypeError('options.isQS must be a [boolean or null or undefined]')
   if (options.isQS && !options.form && isPost) {
     params = qs.stringify(params)
   }
 
   // 判断是否为post提交表单数据
+  options.form ??= false
+  if (notBoolean(options.form))
+    throw new TypeError('options.form must be a [boolean or null or undefined]')
   if (options.form && isPost) {
     const form = new FormData()
     Object.keys(params).forEach((key) => {
