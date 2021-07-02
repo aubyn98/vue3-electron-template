@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import { ElMessage } from 'element-plus'
-import { Dev, Pro } from '../config'
+import { Dev, Pro } from 'config'
 
 // 判断开发环境
 const development = process.env.NODE_ENV === 'development'
@@ -104,3 +104,11 @@ export function request(
       return Promise.reject(err)
     })
 }
+function simplify(type) {
+  return function (url, params, config, options) {
+    return request(url, type, params, config, options)
+  }
+}
+request.get = simplify('get')
+request.post = simplify('post')
+export default request
