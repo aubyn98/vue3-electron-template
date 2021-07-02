@@ -7,5 +7,5 @@
     "jsx": "preserve",
     "moduleResolution": "node"
   },
-  "include": ["**/*"]
+  "include": ["**/*", "node_modules/vue-router"]
 }
