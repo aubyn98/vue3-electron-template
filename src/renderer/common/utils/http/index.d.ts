@@ -7,7 +7,7 @@ type config = Omit<
   AxiosRequestConfig,
   'url' | 'params' | 'data' | 'method' | 'baseURL'
 >
-type options = { isQS?: boolean; form?: boolean }
+type options = { qs?: boolean; form?: boolean }
 export function request(
   url: URL,
   method: method,

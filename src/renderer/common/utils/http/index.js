@@ -43,7 +43,7 @@ export function request(
   method,
   params = {},
   config = {},
-  options = { isQS: true, form: false }
+  options = { qs: true, form: false }
 ) {
   if (!url) throw new Error('argument[0] missing')
   if (typeof url !== 'string')
@@ -55,9 +55,9 @@ export function request(
     throw new TypeError('argument[1], method must be ' + methods.join(' | '))
 
   // 是否序列化数据
-  const isQS = options.isQS ?? true
+  const isQS = options.qs ?? true
   if (notBoolean(isQS))
-    throw new TypeError('options.isQS must be a [boolean or null or undefined]')
+    throw new TypeError('options.qs must be a [boolean or null or undefined]')
 
   // 判断是否处理为表单数据
   const isForm = options.form ?? false
