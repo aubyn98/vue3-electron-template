@@ -1,4 +1,4 @@
-import { request } from '../utils/http'
+const { request } = require('../utils/http')
 let apis = require.context('./', true, /\.js$/)
 apis = apis.keys().reduce((total, apiPath) => {
   // const apiName = apiPath.match(/.*\/(.*)\.js$/)[1]
@@ -7,7 +7,7 @@ apis = apis.keys().reduce((total, apiPath) => {
   }
   return total
 }, {})
-export default {
+module.exports = {
   install(app) {
     app.config.globalProperties.$api = apis
     app.config.globalProperties.$request = request
