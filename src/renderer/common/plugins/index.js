@@ -1,5 +1,4 @@
 import apis from 'apis'
-import utils from 'utils'
 import comp from 'comp'
 export default function (app) {
   const plugins = require.context('./', true, /\.js$/)
@@ -9,5 +8,5 @@ export default function (app) {
       plugins(pluginPath).default(app)
     }
   })
-  app.use(apis).use(utils).use(comp)
+  app.use(apis).use(comp)
 }
