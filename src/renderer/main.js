@@ -6,7 +6,7 @@ import store from 'store'
 
 // common -------------------
 import plugins from 'plugins'
-import 'styles'
+import 'styles/index.scss'
 // --------------------------
 
 createApp(App).use(store).use(router).use(plugins).mount('#app')
